@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react';
+import '../styles/StudentList.scss';
 
 // components //
 import StudentListItem from './StudentListItem';
@@ -19,5 +20,9 @@ export default function StudentList() {
     return <StudentListItem {...student} />;
   });
 
-  return <ul>{studentList}</ul>;
+  return (
+    <div className="main-content">
+      <ul>{studentList}</ul>
+    </div>
+  );
 }
