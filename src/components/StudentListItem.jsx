@@ -1,3 +1,5 @@
+import '../styles/StudentListItem.scss';
+
 export default function StudentListItem(props) {
   const {email, company, skill, firstName, lastName, pic, grades} = props;
 
@@ -9,15 +11,15 @@ export default function StudentListItem(props) {
     <li className="student-item">
       <img src={pic} />
       <div className="student-info">
-        <p>
-          <b>
-            {firstName} {lastName}
-          </b>
+        <p className="student-name">
+          {firstName} {lastName}
         </p>
-        <p>Email: {email}</p>
-        <p>Company: {company}</p>
-        <p>Skill: {skill}</p>
-        <p>Average: {average}%</p>
+        <div className="student-details">
+          <p>Email: {email}</p>
+          <p>Company: {company}</p>
+          <p>Skill: {skill}</p>
+          <p>Average: {average}%</p>
+        </div>
       </div>
     </li>
   );

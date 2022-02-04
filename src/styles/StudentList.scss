@@ -1,17 +1,15 @@
-.main-content {
+.student-list {
   background: #ffffff;
-  width: 60%;
+  width: 65%;
   margin: auto;
   border-radius: 10px;
+  margin: 0;
+  max-height: 700px;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-.student-item {
-  list-style: none;
-  display: flex;
-  img {
-    min-width: 200px;
-    background: #ffffff;
-    border-radius: 50%;
-    border: 1px solid #e8e6e9;
-  }
+::-webkit-scrollbar {
+  display: none;
 }

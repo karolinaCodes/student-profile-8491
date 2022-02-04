@@ -20,9 +20,5 @@ export default function StudentList() {
     return <StudentListItem {...student} />;
   });
 
-  return (
-    <div className="main-content">
-      <ul>{studentList}</ul>
-    </div>
-  );
+  return <ul className="student-list">{studentList}</ul>;
 }
