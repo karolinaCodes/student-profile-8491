@@ -20,7 +20,8 @@
   display: none;
 }
 
-#name-search {
+#name-search,
+#add-tag {
   width: 100%;
   border: none;
   border-bottom: 1px solid #e8e6e9;
@@ -31,7 +32,8 @@
   font-weight: 300;
 }
 
-#name-search:focus-visible {
+#name-search:focus-visible,
+#add-tag:focus-visible {
   outline: none;
 }
 
@@ -40,4 +42,21 @@
   justify-content: center;
   align-items: center;
   height: 50px;
+}
+
+.tag-container {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #e1e0e2;
+  height: 30px;
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

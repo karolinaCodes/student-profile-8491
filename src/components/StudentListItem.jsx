@@ -7,7 +7,8 @@ import {AiOutlineMinusCircle, AiOutlinePlusCircle} from 'react-icons/ai';
 export default function StudentListItem(props) {
   const {email, company, skill, firstName, lastName, pic, grades} = props;
   const [open, setOpen] = useState(false);
-  console.log(grades);
+  const [tagInput, setTagInput] = useState('');
+  const [tags, setTags] = useState([]);
 
   const average = (
     grades.reduce((acc, curr) => +acc + +curr) / grades.length
@@ -16,6 +17,18 @@ export default function StudentListItem(props) {
   const formattedGrades = grades.map((grade, i) => (
     <p key={i}>
       Test {i + 1}: {grade}%
+    </p>
+  ));
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setTags(prev => [...prev, tagInput]);
+    setTagInput('');
+  };
+
+  const tagElements = tags.map((tag, i) => (
+    <p key={i} className="tag">
+      {tag}
     </p>
   ));
 
@@ -33,6 +46,16 @@ export default function StudentListItem(props) {
             <p>Skill: {skill}</p>
             <p>Average: {average}%</p>
             {open && <div className="grades">{formattedGrades}</div>}
+            <div className="tag-container">{tagElements}</div>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                id="add-tag"
+                placeholder="Add a tag"
+                value={tagInput}
+                onChange={e => setTagInput(e.target.value)}
+              />
+            </form>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ export default function StudentList() {
   return (
     <div className="student-list">
       <input
-        type="type"
+        type="text"
         id="name-search"
         placeholder="Search by name"
         value={queryString}
