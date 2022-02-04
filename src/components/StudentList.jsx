@@ -12,15 +12,25 @@ export default function StudentList() {
   useEffect(() => {
     axios
       .get('https://api.hatchways.io/assessment/students')
-      .then(res => setStudents(res.data.students))
+      .then(res => {
+        // filter the student list by the queryString (this way list updates even when users delete character in search bar)
+        const filteredStudentList = res.data.students.filter(student => {
+          return (
+            student.firstName.includes(queryString) ||
+            student.lastName.includes(queryString)
+          );
+        });
+        setStudents(filteredStudentList);
+      })
       .catch(err => console.log(err));
-  }, []);
+  }, [queryString]);
 
-  const studentList = students.map(student => <StudentListItem {...student} />);
+  const studentList = students.map(student => (
+    <StudentListItem key={student.id} {...student} />
+  ));
 
   const changeHandler = e => {
     setQueryString(e.target.value);
-    setStudents('');
   };
 
   return (
