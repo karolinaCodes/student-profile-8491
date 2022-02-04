@@ -6,17 +6,19 @@ export default function StudentListItem(props) {
   ).toFixed(2);
 
   return (
-    <li>
+    <li className="student-item">
       <img src={pic} />
-      <p>
-        <b>
-          {firstName} {lastName}
-        </b>
-      </p>
-      <p>Email: {email}</p>
-      <p>Company: {company}</p>
-      <p>Skill: {skill}</p>
-      <p>Average: {average}%</p>
+      <div className="student-info">
+        <p>
+          <b>
+            {firstName} {lastName}
+          </b>
+        </p>
+        <p>Email: {email}</p>
+        <p>Company: {company}</p>
+        <p>Skill: {skill}</p>
+        <p>Average: {average}%</p>
+      </div>
     </li>
   );
 }

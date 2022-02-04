@@ -1,3 +1,17 @@
 .main-content {
-  width: 100%;
+  background: #ffffff;
+  width: 60%;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.student-item {
+  list-style: none;
+  display: flex;
+  img {
+    min-width: 200px;
+    background: #ffffff;
+    border-radius: 50%;
+    border: 1px solid #e8e6e9;
+  }
 }
