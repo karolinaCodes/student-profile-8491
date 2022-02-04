@@ -7,6 +7,7 @@ import StudentListItem from './StudentListItem';
 
 export default function StudentList() {
   const [students, setStudents] = useState([]);
+  const [queryString, setQueryString] = useState('');
 
   useEffect(() => {
     axios
@@ -15,10 +16,23 @@ export default function StudentList() {
       .catch(err => console.log(err));
   }, []);
 
-  const studentList = students.map(student => {
-    console.log({...student});
-    return <StudentListItem {...student} />;
-  });
+  const studentList = students.map(student => <StudentListItem {...student} />);
 
-  return <ul className="student-list">{studentList}</ul>;
+  const changeHandler = e => {
+    setQueryString(e.target.value);
+    setStudents('');
+  };
+
+  return (
+    <div className="student-list">
+      <input
+        type="type"
+        id="name-search"
+        placeholder="Search by name"
+        value={queryString}
+        onChange={changeHandler}
+      />
+      <ul>{studentList}</ul>
+    </div>
+  );
 }
