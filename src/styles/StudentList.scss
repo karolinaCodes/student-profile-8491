@@ -34,3 +34,10 @@
 #name-search:focus-visible {
   outline: none;
 }
+
+#no-results-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}

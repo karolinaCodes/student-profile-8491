@@ -16,8 +16,8 @@ export default function StudentList() {
         // filter the student list by the queryString (this way list updates even when users delete character in search bar)
         const filteredStudentList = res.data.students.filter(student => {
           return (
-            student.firstName.includes(queryString) ||
-            student.lastName.includes(queryString)
+            student.firstName.toLowerCase().includes(queryString) ||
+            student.lastName.toLowerCase().includes(queryString)
           );
         });
         setStudents(filteredStudentList);
@@ -42,7 +42,11 @@ export default function StudentList() {
         value={queryString}
         onChange={changeHandler}
       />
-      <ul>{studentList}</ul>
+      {!students.length ? (
+        <p id="no-results-msg">No Results found.</p>
+      ) : (
+        <ul>{studentList}</ul>
+      )}
     </div>
   );
 }
