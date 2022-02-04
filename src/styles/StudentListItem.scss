@@ -6,9 +6,9 @@ p {
 
 .student-item {
   list-style: none;
-  gap: 2.1rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 2rem;
   border-bottom: 1px solid #e8e6e9;
 
@@ -31,4 +31,19 @@ p {
 
 .student-details {
   margin-left: 1.5rem;
+}
+
+.expand-btn {
+  align-self: baseline;
+  background: none;
+  border: none;
+}
+
+.student-data {
+  display: flex;
+  gap: 2.1rem;
+}
+
+.grades {
+  margin-top: 15px;
 }
