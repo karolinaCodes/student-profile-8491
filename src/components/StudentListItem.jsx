@@ -5,7 +5,18 @@ import {useState} from 'react';
 import {AiOutlineMinusCircle, AiOutlinePlusCircle} from 'react-icons/ai';
 
 export default function StudentListItem(props) {
-  const {email, company, skill, firstName, lastName, pic, grades} = props;
+  const {
+    id,
+    email,
+    company,
+    skill,
+    firstName,
+    lastName,
+    pic,
+    grades,
+    studentList,
+    setStudentList,
+  } = props;
   const [open, setOpen] = useState(false);
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState([]);
@@ -24,6 +35,15 @@ export default function StudentListItem(props) {
     e.preventDefault();
     setTags(prev => [...prev, tagInput]);
     setTagInput('');
+
+    setStudentList(prev => {
+      const copy = [...prev];
+      const index = copy.findIndex(student => student.id === id);
+      copy[index].tags
+        ? copy[index].tags.push(tagInput)
+        : (copy[index].tags = [tagInput]);
+      return copy;
+    });
   };
 
   const tagElements = tags.map((tag, i) => (

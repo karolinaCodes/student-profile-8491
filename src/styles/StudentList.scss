@@ -20,7 +20,8 @@
   display: none;
 }
 
-#name-search {
+#name-search,
+#tag-search {
   width: 100%;
   border: none;
   border-bottom: 1px solid #e8e6e9;
@@ -31,7 +32,8 @@
   font-weight: 300;
 }
 
-#name-search:focus-visible {
+#name-search:focus-visible,
+#tag-search:focus-visible {
   outline: none;
 }
 
