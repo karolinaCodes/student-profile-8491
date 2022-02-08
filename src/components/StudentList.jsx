@@ -66,31 +66,18 @@ export default function StudentList() {
   // };
 
   const nameInputHandler = e => {
-    console.log(tagInput);
-    console.log(results);
     setNameInput(e.target.value);
     if (tagInput) {
       const res = results.filter(student => {
-        console.log(
-          student.tags && student.tags.includes(tag => tag.includes(tagInput))
-        );
-        console.log(
-          student.tags &&
-            student.tags.includes(tag => {
-              console.log('here', tag);
-            })
-        );
-        console.log(student.tags);
         return (
           (student.firstName.toLowerCase().includes(e.target.value) ||
             student.lastName.toLowerCase().includes(e.target.value)) &&
           student.tags &&
-          student.tags.includes(tag => tag.includes(tagInput))
+          student.tags.filter(tag => tag.includes(tagInput))
         );
       });
       return setStudentList(res);
     }
-    console.log('here');
     const res = results.filter(
       student =>
         student.firstName.toLowerCase().includes(e.target.value) ||
@@ -101,6 +88,24 @@ export default function StudentList() {
 
   const tagInputHandler = e => {
     setTagInput(e.target.value);
+    console.log(e.target.value);
+
+    if (nameInput) {
+      const res = results.filter(student => {
+        return (
+          (student.firstName.toLowerCase().includes(nameInput) ||
+            student.lastName.toLowerCase().includes(nameInput)) &&
+          student.tags &&
+          student.tags.filter(tag => tag.includes(e.target.value))
+        );
+      });
+      return setStudentList(res);
+    }
+    const res = results.filter(
+      student =>
+        student.tags && student.tags.filter(tag => tag.includes(e.target.value))
+    );
+    setStudentList(res);
   };
 
   return (
