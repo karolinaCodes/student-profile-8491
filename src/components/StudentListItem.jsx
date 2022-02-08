@@ -14,8 +14,8 @@ export default function StudentListItem(props) {
     lastName,
     pic,
     grades,
-    studentList,
-    setStudentList,
+    results,
+    setResults,
   } = props;
   const [open, setOpen] = useState(false);
   const [tagInput, setTagInput] = useState('');
@@ -36,7 +36,7 @@ export default function StudentListItem(props) {
     setTags(prev => [...prev, tagInput]);
     setTagInput('');
 
-    setStudentList(prev => {
+    setResults(prev => {
       const copy = [...prev];
       const index = copy.findIndex(student => student.id === id);
       copy[index].tags

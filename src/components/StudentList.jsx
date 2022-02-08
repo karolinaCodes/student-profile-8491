@@ -7,17 +7,21 @@ import StudentListItem from './StudentListItem';
 
 export default function StudentList() {
   const [results, setResults] = useState([]);
+  // const [filteredList, setFilteredList] = useState([]);
   const [studentList, setStudentList] = useState([]);
-
   const [nameInput, setNameInput] = useState('');
   const [tagInput, setTagInput] = useState('');
+
+  // console.log(results);
 
   useEffect(() => {
     axios
       .get('https://api.hatchways.io/assessment/students')
       .then(res => {
-        setResults(res.data.students);
+        // setResults(res.data.students);
+        // setFilteredList(res.data.students);
         setStudentList(res.data.students);
+        setResults(res.data.students);
       })
       .catch(err => console.log(err));
   }, []);
@@ -26,42 +30,77 @@ export default function StudentList() {
     <StudentListItem
       key={student.id}
       {...student}
-      studentList={studentList}
-      setStudentList={setStudentList}
+      results={results}
+      setResults={setResults}
     />
   ));
 
-  // filter the student list by the e.target.value (this way list updates even when users delete character in search bar)
-  const filterList = val => {
-    console.log(val.tag);
-    console.log(studentList);
-    return results.filter(student => {
-      console.log(student.tags);
-      console.log(
-        student.tags && student.tags.filter(tag => tag.includes(val.tag))
-      );
-      return student.tags && student.tags.filter(tag => tag.includes(val.tag));
-      // return (
-      //   (student.firstName
-      //     .toLowerCase()
-      //     .includes(val.name ? val.name : nameInput) ||
-      //     student.lastName
-      //       .toLowerCase()
-      //       .includes(val.name ? val.name : nameInput)) &&
-      //   student.tags &&
-      //   student.tags.includes(val.tag ? val.tag : tagInput)
-      // );
-    });
-  };
+  // filter the list based on name input and tag input then map then to elements to render
+  // const filteredList = studentList
+  //   .filter(
+  //     student =>
+  //       student.firstName.includes(nameInput) ||
+  //       student.lastName.includes(nameInput)
+  //   )
+  //   .map(student => (
+  //     <StudentListItem
+  //       key={student.id}
+  //       {...student}
+  //       studentList={studentList}
+  //       setStudentList={setStudentList}
+  //     />
+  //   ));
+
+  // const filter = () => {
+  //   if (nameInput) {
+  //     const res = results.filter(
+  //       student =>
+  //         student.firstName.toLowerCase().includes(e.target.value) ||
+  //         student.lastName.toLowerCase().includes(e.target.value)
+  //     );
+  //   }
+
+  //   if (tagInput) {
+  //     student => student.tags.includes(tag => tag.includes(e.target.value));
+  //   }
+  // };
 
   const nameInputHandler = e => {
+    console.log(tagInput);
+    console.log(results);
     setNameInput(e.target.value);
-    setStudentList(filterList({name: e.target.value}));
+    if (tagInput) {
+      const res = results.filter(student => {
+        console.log(
+          student.tags && student.tags.includes(tag => tag.includes(tagInput))
+        );
+        console.log(
+          student.tags &&
+            student.tags.includes(tag => {
+              console.log('here', tag);
+            })
+        );
+        console.log(student.tags);
+        return (
+          (student.firstName.toLowerCase().includes(e.target.value) ||
+            student.lastName.toLowerCase().includes(e.target.value)) &&
+          student.tags &&
+          student.tags.includes(tag => tag.includes(tagInput))
+        );
+      });
+      return setStudentList(res);
+    }
+    console.log('here');
+    const res = results.filter(
+      student =>
+        student.firstName.toLowerCase().includes(e.target.value) ||
+        student.lastName.toLowerCase().includes(e.target.value)
+    );
+    setStudentList(res);
   };
 
   const tagInputHandler = e => {
     setTagInput(e.target.value);
-    setStudentList(filterList({tag: e.target.value}));
   };
 
   return (
