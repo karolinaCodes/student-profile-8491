@@ -12,8 +12,6 @@ export default function StudentList() {
   const [nameInput, setNameInput] = useState('');
   const [tagInput, setTagInput] = useState('');
 
-  // console.log(results);
-
   useEffect(() => {
     axios
       .get('https://api.hatchways.io/assessment/students')
@@ -35,38 +33,10 @@ export default function StudentList() {
     />
   ));
 
-  // filter the list based on name input and tag input then map then to elements to render
-  // const filteredList = studentList
-  //   .filter(
-  //     student =>
-  //       student.firstName.includes(nameInput) ||
-  //       student.lastName.includes(nameInput)
-  //   )
-  //   .map(student => (
-  //     <StudentListItem
-  //       key={student.id}
-  //       {...student}
-  //       studentList={studentList}
-  //       setStudentList={setStudentList}
-  //     />
-  //   ));
-
-  // const filter = () => {
-  //   if (nameInput) {
-  //     const res = results.filter(
-  //       student =>
-  //         student.firstName.toLowerCase().includes(e.target.value) ||
-  //         student.lastName.toLowerCase().includes(e.target.value)
-  //     );
-  //   }
-
-  //   if (tagInput) {
-  //     student => student.tags.includes(tag => tag.includes(e.target.value));
-  //   }
-  // };
-
   const nameInputHandler = e => {
     setNameInput(e.target.value);
+
+    // if tagInput is not present, filter only by the nameInput
     if (tagInput) {
       const res = results.filter(student => {
         return (
@@ -88,9 +58,13 @@ export default function StudentList() {
 
   const tagInputHandler = e => {
     setTagInput(e.target.value);
-    console.log(e.target.value);
+
+    if (!e.target.value) {
+      return setStudentList(results);
+    }
 
     if (nameInput) {
+      // if nameInput is not present, filter only by the tagInput
       const res = results.filter(student => {
         return (
           (student.firstName.toLowerCase().includes(nameInput) ||
@@ -101,9 +75,14 @@ export default function StudentList() {
       });
       return setStudentList(res);
     }
+
+    // if student has tags property, filter the tags to find all the strings that include the tag input, since returns an array, if the array is empty that means no tags match.
     const res = results.filter(
       student =>
-        student.tags && student.tags.filter(tag => tag.includes(e.target.value))
+        student.tags &&
+        student.tags.filter(tag => {
+          return tag.includes(e.target.value);
+        }).length > 0
     );
     setStudentList(res);
   };

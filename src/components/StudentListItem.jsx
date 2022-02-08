@@ -14,12 +14,12 @@ export default function StudentListItem(props) {
     lastName,
     pic,
     grades,
-    results,
+    tags,
     setResults,
   } = props;
+
   const [open, setOpen] = useState(false);
   const [tagInput, setTagInput] = useState('');
-  const [tags, setTags] = useState([]);
 
   const average = (
     grades.reduce((acc, curr) => +acc + +curr) / grades.length
@@ -33,7 +33,6 @@ export default function StudentListItem(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setTags(prev => [...prev, tagInput]);
     setTagInput('');
 
     setResults(prev => {
@@ -46,11 +45,13 @@ export default function StudentListItem(props) {
     });
   };
 
-  const tagElements = tags.map((tag, i) => (
-    <p key={i} className="tag">
-      {tag}
-    </p>
-  ));
+  const tagElements =
+    tags &&
+    tags.map((tag, i) => (
+      <p key={i} className="tag">
+        {tag}
+      </p>
+    ));
 
   return (
     <li className="student-item">
