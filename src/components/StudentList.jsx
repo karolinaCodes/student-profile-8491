@@ -7,7 +7,6 @@ import StudentListItem from './StudentListItem';
 
 export default function StudentList() {
   const [results, setResults] = useState([]);
-  // const [filteredList, setFilteredList] = useState([]);
   const [studentList, setStudentList] = useState([]);
   const [nameInput, setNameInput] = useState('');
   const [tagInput, setTagInput] = useState('');
@@ -16,8 +15,6 @@ export default function StudentList() {
     axios
       .get('https://api.hatchways.io/assessment/students')
       .then(res => {
-        // setResults(res.data.students);
-        // setFilteredList(res.data.students);
         setStudentList(res.data.students);
         setResults(res.data.students);
       })
