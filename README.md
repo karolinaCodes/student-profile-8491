@@ -1,4 +1,4 @@
-# Notes for evaluator
+# Notes for Evaluator
 This assessment took a bit longer for me to complete as I was attending a soft skills training during the time that I was working on this assessment. I was only able to work on it for a limited time in the evenings.
 
 # Submission Detials
